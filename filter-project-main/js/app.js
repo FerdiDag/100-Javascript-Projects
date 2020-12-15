@@ -3,14 +3,7 @@
 
 const filterBtn = document.querySelector(".sortBtn");
 const storeElements = document.querySelectorAll(".store-item");
-
-filterBtn.addEventListener("click", function (e) {
-  e.preventDefault();
-  if (e.target.tagName == "A") {
-    const filter = e.target.dataset.filter;
-    filterStoreItems(storeElements, filter);
-  }
-});
+const searchBar = document.getElementById("search-item");
 
 function filterStoreItems(storeElements, filter) {
   storeElements.forEach((element) => {
@@ -23,3 +16,26 @@ function filterStoreItems(storeElements, filter) {
     }
   });
 }
+
+filterBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  if (e.target.tagName == "A") {
+    const filter = e.target.dataset.filter;
+    filterStoreItems(storeElements, filter);
+  }
+});
+
+function searchBarFilter() {
+  const value = searchBar.value;
+  const newValue = value.toLowerCase();
+  storeElements.forEach((element) => {
+    const itemName = element.querySelector("#store-item-name").textContent;
+    if (itemName.startsWith(newValue)) {
+      element.style.display = "block";
+    } else {
+      element.style.display = "none";
+    }
+  });
+}
+
+searchBar.addEventListener("keyup", searchBarFilter);
