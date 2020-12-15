@@ -30,7 +30,7 @@ function searchBarFilter() {
   const newValue = value.toLowerCase();
   storeElements.forEach((element) => {
     const itemName = element.querySelector("#store-item-name").textContent;
-    if (itemName.startsWith(newValue)) {
+    if (itemName.includes(newValue)) {
       element.style.display = "block";
     } else {
       element.style.display = "none";
